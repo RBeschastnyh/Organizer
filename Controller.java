@@ -1,4 +1,4 @@
-package sample;
+﻿package sample;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -169,7 +169,7 @@ public class Controller implements Initializable {
                 });
             }
         }.start();
-        new Thread(){
+        /*new Thread(){
             @Override
             public void run(){
                 Calendar gc = new GregorianCalendar();
@@ -190,6 +190,6 @@ public class Controller implements Initializable {
                     e.printStackTrace();
                 }
             }
-        }.start();
+        }.start();*/
     }
 }
