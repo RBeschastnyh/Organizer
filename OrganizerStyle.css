@@ -1,4 +1,4 @@
-#add_duty_button{
+#add_duty_button, #clear_all_button{
     -fx-background-color: #f2e3ce;
     -fx-font-family: 'Comfortaa';
     -fx-font-weight: bold;
@@ -9,11 +9,11 @@
 #add_duty_button:hover{
     -fx-background-color: #c3eced;
 }
+#clear_all_button:hover{
+    -fx-background-color: #c3eced;
+}
 
 .root{
     -fx-background : linear-gradient(from 25% 25% to 100% 100%, #e5c5a7, #b6deed);
 }
-.button{
-    -fx-font-family: 'Comfortaa';
-    -fx-font-size: 14px;
-}
+
