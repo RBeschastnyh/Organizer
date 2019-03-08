@@ -39,7 +39,7 @@
                   <Font name="Algerian" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="add_duty_button" layoutX="453.0" layoutY="-10.0" mnemonicParsing="false" onAction="#add_duty" prefHeight="17.0" prefWidth="121.0" text="ДОБАВИТЬ" />
+            <Button fx:id="add_duty_button" layoutX="425.0" layoutY="-10.0" mnemonicParsing="false" onAction="#add_duty" prefHeight="25.0" prefWidth="35.0" text="+" />
             <VBox fx:id="duties_box" layoutX="307.0" layoutY="54.0" prefHeight="168.0" prefWidth="256.0" />
             <TextField fx:id="duty_setText_textLabel" layoutX="337.0" layoutY="28.0" onMouseClicked="#check_inner_state" prefHeight="27.0" prefWidth="232.0" />
             <Label layoutX="296.0" layoutY="29.0" prefHeight="25.0" prefWidth="35.0" text="Дело:" />
@@ -120,6 +120,7 @@
             </Label>
             <Label layoutX="133.0" layoutY="15.0" text="из Москвы" />
             <Label layoutX="202.0" layoutY="15.0" text="на Москву" />
+            <Button fx:id="clear_all_button" layoutX="466.0" layoutY="-10.0" mnemonicParsing="false" onAction="#clearDuties" prefHeight="25.0" prefWidth="107.0" text="Очистить" />
          </children>
       </AnchorPane>
    </children>
