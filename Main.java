@@ -7,6 +7,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 public class Main extends Application {
 
     @Override
@@ -18,7 +22,15 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         primaryStage.setOnCloseRequest((WindowEvent event) -> {
-
+            SaveState ss = SaveState.getUniqueInstance();
+            try{
+                FileOutputStream fos = new FileOutputStream("Ducks.ser");
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(ss);
+                oos.close();
+            } catch(IOException sex){
+                sex.printStackTrace();
+            }
         });
     }
 
