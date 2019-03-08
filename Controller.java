@@ -1,4 +1,4 @@
-﻿package sample;
+package sample;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -7,11 +7,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -69,6 +68,9 @@ public class Controller implements Initializable {
     @FXML
     private TextField duty_setText_textLabel;
 
+    @FXML
+    private Button clear_all_button;
+
     private List<CheckBox> list_of_duties = new ArrayList<>();
 
     private SaveState saved = SaveState.getUniqueInstance();
@@ -90,60 +92,51 @@ public class Controller implements Initializable {
         saved.addCheckBox(button);
         duties_box.getChildren().add(button);
         duty_setText_textLabel.clear();
-        for(int i = 0; i < list_of_duties.size(); ++i){
-            if(list_of_duties.get(i).isSelected()){
-                list_of_duties.get(i).setAllowIndeterminate(false);
+        for(CheckBox cb : list_of_duties){
+            if(cb.isSelected()){
+                cb.setAllowIndeterminate(false);
             }
         }
         add_duty_button.setDisable(true);
     }
 
-    public String getInformation(String string){
-        String time = null;
-        try {
-            Document out_trains = Jsoup.parse(new URL(string), 30000);
-            Elements out_train_time = out_trains.select("div[id=root]").select("div[class=Root Root_layout_desktop Root_pageType_search]").
-                    select("main[class=Root__main]").select("div[class=SearchPage__content]").select("section[class=SearchSegments]").
-                    select("div[class=SearchSegment__timeAndStations]").select("span[class=SearchSegment__time]");
-            time = out_train_time.first().text();
-
-        }catch (IOException ioex){
-            fili_time_out.setText("Ошибка");
-            begovaya_time_out.setText("Ошибка");
-            belorusskaya_time_out.setText("Ошибка");
-            kuntsevo_time_out.setText("Ошибка");
+    @FXML
+    void clearDuties(ActionEvent event) {
+        if(!list_of_duties.isEmpty()){
+            duties_box.getChildren().clear();
+            list_of_duties.clear();
         }
-        return time;
-    }
-
-    public List<Elements> getWeatherFromYandex(String url){
-        List<Elements> weather_states = new ArrayList<>();
-        try {
-            Document weather_document = Jsoup.parse(new URL(url), 30000);
-            Elements weather_circumstance = weather_document.select("div[class=content__main]").
-                    select("div[class=fact__temp-wrap]").select("div[class=link__feelings fact__feelings]").
-                    select("div[class=link__condition day-anchor i-bem]");
-            Elements tables = weather_document.select("div[class=content__main]").
-                    select("div[class=fact__temp-wrap]").select("dl[class=term term_orient_h fact__feels-like]").
-                    select("dd[class=term__value]").select("span[class=temp__value]");
-            weather_states.add(weather_circumstance);
-            weather_states.add(tables);
-        }catch (IOException ioex){
-            ioex.printStackTrace();
-        }
-        return weather_states;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         add_duty_button.setDisable(true);
+        Parsable train_parser = new TrainParser();
+        Parsable weather_parser = new WeathreParser();
+        try {
+            try {
+                FileInputStream fis = new FileInputStream("Ducks.ser");
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                saved = (SaveState) ois.readObject();
+                ois.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }catch (ClassNotFoundException cex) {
+            cex.printStackTrace();
+        }
+        list_of_duties = saved.getCheckList();
+        for(CheckBox ch : list_of_duties){
+            duties_box.getChildren().add(ch);
+        }
+
 
         new Thread() {
             @Override
             public void run() {
                 Platform.runLater(()-> {
-                    weather_circumstance_label.setText(getWeatherFromYandex(weather_url).get(0).text());
-                    current_temperature_label.setText(getWeatherFromYandex(weather_url).get(1).text() + "°C");
+                    weather_circumstance_label.setText(weather_parser.getWeather(weather_url).get(0).text());
+                    current_temperature_label.setText(weather_parser.getWeather(weather_url).get(1).text() + "°C");
                 });
             }
         }.start();
@@ -151,10 +144,10 @@ public class Controller implements Initializable {
             @Override
             public void run() {
                 Platform.runLater(()->{
-                    begovaya_time_out.setText(getInformation(begovaya_out_suburban_trains_url));
-                    fili_time_out.setText(getInformation(fili_out_suburban_trains_url));
-                    kuntsevo_time_out.setText(getInformation(kuntsevo_out_suburban_trins_url));
-                    belorusskaya_time_out.setText(getInformation(belorusskaya_out_suburban_trains_url));
+                    begovaya_time_out.setText(train_parser.getInformation(begovaya_out_suburban_trains_url));
+                    fili_time_out.setText(train_parser.getInformation(fili_out_suburban_trains_url));
+                    kuntsevo_time_out.setText(train_parser.getInformation(kuntsevo_out_suburban_trins_url));
+                    belorusskaya_time_out.setText(train_parser.getInformation(belorusskaya_out_suburban_trains_url));
                 });
             }
         }.start();
@@ -162,10 +155,10 @@ public class Controller implements Initializable {
             @Override
             public void run() {
                 Platform.runLater(()->{
-                    kuntsevo_time_in.setText(getInformation(kuntsevo_in_suburban_trains_url));
-                    fili_time_in.setText(getInformation(fili_and_begovaya_in_subruban_trains_url));
-                    begovaya_time_in.setText(getInformation(fili_and_begovaya_in_subruban_trains_url));
-                    belorusskaya_time_in.setText(getInformation(belorusskaya_in_suburban_trains_url));
+                    kuntsevo_time_in.setText(train_parser.getInformation(kuntsevo_in_suburban_trains_url));
+                    fili_time_in.setText(train_parser.getInformation(fili_and_begovaya_in_subruban_trains_url));
+                    begovaya_time_in.setText(train_parser.getInformation(fili_and_begovaya_in_subruban_trains_url));
+                    belorusskaya_time_in.setText(train_parser.getInformation(belorusskaya_in_suburban_trains_url));
                 });
             }
         }.start();
