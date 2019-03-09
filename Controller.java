@@ -73,7 +73,9 @@ public class Controller implements Initializable {
 
     private List<CheckBox> list_of_duties = new ArrayList<>();
 
-    private SaveState saved = SaveState.getUniqueInstance();
+    private static Terminal terminal = new Terminal();
+
+    private static SaveState saveState = new SaveState();
 
     @FXML
     void check_inner_state(MouseEvent event) {
@@ -89,7 +91,7 @@ public class Controller implements Initializable {
 
         CheckBox button = new CheckBox(duty_setText_textLabel.getText());
         list_of_duties.add(button);
-        saved.addCheckBox(button);
+        saveState.addCheckBox(button);
         duties_box.getChildren().add(button);
         duty_setText_textLabel.clear();
         for(CheckBox cb : list_of_duties){
@@ -97,6 +99,7 @@ public class Controller implements Initializable {
                 cb.setAllowIndeterminate(false);
             }
         }
+
         add_duty_button.setDisable(true);
     }
 
@@ -108,26 +111,38 @@ public class Controller implements Initializable {
         }
     }
 
+    public static Terminal getTerminal(){
+        return terminal;
+    }
+
+    public static SaveState getState(){
+        return saveState;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         add_duty_button.setDisable(true);
         Parsable train_parser = new TrainParser();
         Parsable weather_parser = new WeathreParser();
+        List<String> duties = null;
+        List<Boolean> states = null;
         try {
             try {
-                FileInputStream fis = new FileInputStream("Ducks.ser");
+                FileInputStream fis = new FileInputStream("SavedState.ser");
                 ObjectInputStream ois = new ObjectInputStream(fis);
-                saved = (SaveState) ois.readObject();
+                duties = (List<String>) ois.readObject();
+                states = (List<Boolean>) ois.readObject();
+                saveState.setLists(duties, states);
+                Platform.runLater(() -> {
+                    duties_box.getChildren().addAll(saveState.getCheckList());
+                });
+                list_of_duties = saveState.getCheckList();
                 ois.close();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }catch (ClassNotFoundException cex) {
             cex.printStackTrace();
-        }
-        list_of_duties = saved.getCheckList();
-        for(CheckBox ch : list_of_duties){
-            duties_box.getChildren().add(ch);
         }
 
 
