@@ -10,6 +10,7 @@ import javafx.stage.WindowEvent;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.List;
 
 public class Main extends Application {
 
@@ -22,15 +23,23 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         primaryStage.setOnCloseRequest((WindowEvent event) -> {
-            SaveState ss = SaveState.getUniqueInstance();
+            Terminal t = Controller.getTerminal();
+            t.setSaveState(Controller.getState());
+            SaveState s = t.getSaveState();
+            s.setNamesAndConditions();
+            List<String> names = s.getNames();
+            List<Boolean> states = s.getStates();
             try{
-                FileOutputStream fos = new FileOutputStream("Ducks.ser");
+                FileOutputStream fos = new FileOutputStream("SavedState.ser");
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
-                oos.writeObject(ss);
+                oos.writeObject(names);
+                oos.writeObject(states);
                 oos.close();
             } catch(IOException sex){
                 sex.printStackTrace();
             }
+            System.out.println(names);
+            System.out.println(states);
         });
     }
 
