@@ -38,8 +38,6 @@ public class Main extends Application {
             } catch(IOException sex){
                 sex.printStackTrace();
             }
-            System.out.println(names);
-            System.out.println(states);
         });
     }
 
