@@ -1,12 +1,10 @@
 package sample;
 
 import javafx.scene.control.CheckBox;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SaveState implements Serializable {
+public class SaveState {
 
     private List<CheckBox> list_of_duties = new ArrayList<>();
 
