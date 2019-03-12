@@ -7,12 +7,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Controller implements Initializable {
@@ -177,27 +175,5 @@ public class Controller implements Initializable {
                 });
             }
         }.start();
-        /*new Thread(){
-            @Override
-            public void run(){
-                Calendar gc = new GregorianCalendar();
-                long difference = (-gc.get(Calendar.DAY_OF_WEEK) + 2) * 86400000;
-                long to_end = 86400000*5;
-                String begin_of_the_week = new SimpleDateFormat("yyyy.MM.dd").format(new Date(System.currentTimeMillis() + difference));
-                String end_of_the_week = new SimpleDateFormat("yyyy.MM.dd").format(new Date(System.currentTimeMillis() + difference + to_end));
-                final String curriculum_url = "https://www.hse.ru/ba/cosec/timetable?fromdate=" + begin_of_the_week + "&todate=" + end_of_the_week + "&groupoid=9203&receiverType=3&timetable-courses=2&timetable-groups=9203&timetable-view-switcher=list";
-                try {
-                    Document curriculum_tables = Jsoup.parse(new URL(curriculum_url), 30000);
-                    Elements curriculum = curriculum_tables.select("div[class=page]").select("div[class=layout wide]").
-                            select("div[class=grid grid2]").select("div[class=wide tt-timetable]").
-                            select("div[class=content tt-timetable__content is-block]").select("div[class=tt tt-list]")//.
-                            //select("div[class=tt-list__item]")
-                            ;
-                    System.out.println(curriculum.outerHtml());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();*/
     }
 }
