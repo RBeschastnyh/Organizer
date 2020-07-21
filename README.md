@@ -1,2 +1,2 @@
 # Organizer
-A window application, which allows you to find out the train's schedule in Moscow smolenskaya suburban zone and current weather in Moscow 
+Desktop-приложение для просмотра погоды, электричек Смоленского направления и расписания во ВШЭ в одном окошке. Пока сюда лучше не смотреть, ведутся работы
