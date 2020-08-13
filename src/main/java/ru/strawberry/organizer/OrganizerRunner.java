@@ -3,12 +3,7 @@
  */
 package ru.strawberry.organizer;
 
-public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
-
+public class OrganizerRunner {
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
     }
 }

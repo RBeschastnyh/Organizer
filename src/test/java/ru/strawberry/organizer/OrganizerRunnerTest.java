@@ -6,9 +6,9 @@ package ru.strawberry.organizer;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class AppTest {
+public class OrganizerRunnerTest {
     @Test public void testAppHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+        OrganizerRunner classUnderTest = new OrganizerRunner();
+        assertNotNull("app should have a greeting", "dvdv");
     }
 }
