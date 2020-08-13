@@ -1,0 +1,25 @@
+html {
+    min-height: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(-20deg, #61B7CF, #FFC073);
+}
+
+nav {
+    top: 0;
+    width: 100%;
+    position: fixed;
+    height: 7vmin;
+//background-color: navy;
+    z-index: 1000;
+}
+
+.menu-invoker {
+    margin-left: 1%;
+    height: inherit;
+    width: 8vmin;
+//background-color: crimson;
+}
