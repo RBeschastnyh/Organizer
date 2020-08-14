@@ -6,8 +6,11 @@
     </head>
     <body>
         <nav>
-            <div class="menu-invoker">
-
+            <div class="menu-invoker-placeholder">
+                <div class="menu-invoker">
+                    <div class="menu-straight-line-top"></div>
+                    <div class="menu-straight-line-bottom"></div>
+                </div>
             </div>
         </nav>
     </body>
