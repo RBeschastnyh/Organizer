@@ -17,13 +17,15 @@
                     </div>
                 </label>
                 <div class="main-menu-placeholder">
-                    <div class="menu-item">svdsv</div>
-                    <div class="menu-item">gbbgfgb</div>
-                    <div class="menu-item">xcxcv</div>
+                    <div class="menu-item">Посмотреть электричку</div>
+                    <div class="menu-item">Погода в твоём районе</div>
+                    <div class="menu-item"></div>
                 </div>
                 </label>
             </div>
         </nav>
-
+        <footer>
+            Данные предоставлены сервисом <a href="https://rasp.yandex.ru/" target="_blank">Яндекс.Расписания</a>
+        </footer>
     </body>
 </html>
