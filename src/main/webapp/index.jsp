@@ -20,7 +20,9 @@
                 <div class="main-menu-placeholder">
                     <div class="menu-item">Посмотреть электричку</div>
                     <div class="menu-item">Погода в твоём районе</div>
-                    <div class="menu-item"></div>
+                    <div class="menu-item">Список дел</div>
+                    <div class="menu-item">Расписание занятий</div>
+                    <div class="menu-item">Об авторе</div>
                 </div>
                 </label>
             </div>
