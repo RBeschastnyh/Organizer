@@ -1,0 +1,76 @@
+.main-text {
+    width: 100%;
+    height: 150px;
+    padding-top: 150px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 52px;
+    font-family: 'Jura', sans-serif;
+}
+
+.schedule-placeholder {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 400px;
+}
+
+.schedule-column-placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    width: 25%;
+}
+
+.schedule-line {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 25%;
+}
+
+.image-part-placeholder {
+    position: relative;
+    height: 100%;
+    width: 20%;
+}
+
+.subway-logo-placeholder {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    height: 50%;
+}
+
+.subway-logo {
+    width: 100%;
+    height: 100%;
+}
+
+.suburban-name-placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    font-size: 33px;
+    font-family: 'Jura', sans-serif;
+}
+
+.text-placeholder {
+    height: 50%;
+    width: 100%;
+    background-color: cornflowerblue;
+}
+
+.subway-time-placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 30%;
+    font-size: 32px;
+    font-family: 'Jura', sans-serif;
+}

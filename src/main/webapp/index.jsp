@@ -18,7 +18,8 @@
                     </div>
                 </label>
                 <div class="main-menu-placeholder">
-                    <div class="menu-item">Посмотреть электричку</div>
+                    <div class="menu-item"><a class="without-highlighting" href="/strawberry-organizer/">Главная</a></div>
+                    <div class="menu-item"><a class="without-highlighting" href="/strawberry-organizer/schedule">Посмотреть электричку</a></div>
                     <div class="menu-item">Погода в твоём районе</div>
                     <div class="menu-item">Список дел</div>
                     <div class="menu-item">Расписание занятий</div>
@@ -66,7 +67,7 @@
             </div>
         </div>
         <footer>
-            Данные предоставлены сервисом <a href="https://rasp.yandex.ru/" target="_blank">Яндекс.Расписания</a>
+            2020, Роман Бесчастных
         </footer>
     </body>
 </html>
