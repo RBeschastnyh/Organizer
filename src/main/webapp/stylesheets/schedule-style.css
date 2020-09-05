@@ -60,9 +60,11 @@
 }
 
 .text-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 50%;
     width: 100%;
-    background-color: cornflowerblue;
 }
 
 .subway-time-placeholder {

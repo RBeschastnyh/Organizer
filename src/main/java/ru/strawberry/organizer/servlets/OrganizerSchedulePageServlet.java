@@ -12,10 +12,16 @@ import java.io.IOException;
 @WebServlet("/schedule")
 public class OrganizerSchedulePageServlet extends HttpServlet {
 
-    public ScheduleService scheduleService;
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ScheduleService scheduleService = new ScheduleService();
+        req.setAttribute("belTime", scheduleService.getTime("bel"));
+        req.setAttribute("begTime", scheduleService.getTime("beg"));
+        req.setAttribute("testTime", scheduleService.getTime("test"));
+        req.setAttribute("filiTime", scheduleService.getTime("fili"));
+        req.setAttribute("sbTime", scheduleService.getTime("sb"));
+        req.setAttribute("kuntsTime", scheduleService.getTime("kunts"));
         req.getRequestDispatcher("/schedule.jsp").forward(req, resp);
     }
+
 }

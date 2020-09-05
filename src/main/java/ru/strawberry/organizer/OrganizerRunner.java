@@ -3,7 +3,11 @@
  */
 package ru.strawberry.organizer;
 
+import ru.strawberry.organizer.services.ScheduleService;
+
 public class OrganizerRunner {
     public static void main(String[] args) {
+        ScheduleService scheduleService = new ScheduleService();
+        String string = scheduleService.getTime("sb");
     }
 }

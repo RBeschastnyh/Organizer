@@ -46,7 +46,7 @@
                     </div>
                     <div class="subway-time-placeholder">
                         <div class="text-placeholder">
-
+                            ${belTime}
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                     </div>
                     <div class="subway-time-placeholder">
                         <div class="text-placeholder">
-
+                            ${filiTime}
                         </div>
                     </div>
                 </div>
@@ -99,7 +99,7 @@
                     </div>
                     <div class="subway-time-placeholder">
                         <div class="text-placeholder">
-
+                            ${begTime}
                         </div>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
                     </div>
                     <div class="subway-time-placeholder">
                         <div class="text-placeholder">
-
+                            ${sbTime}
                         </div>
                     </div>
                 </div>
@@ -152,7 +152,7 @@
                     </div>
                     <div class="subway-time-placeholder">
                         <div class="text-placeholder">
-
+                            ${testTime}
                         </div>
                     </div>
                 </div>
@@ -169,7 +169,7 @@
                     </div>
                     <div class="subway-time-placeholder">
                         <div class="text-placeholder">
-
+                            ${kuntsTime}
                         </div>
                     </div>
                 </div>
