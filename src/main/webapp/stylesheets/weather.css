@@ -1,0 +1,19 @@
+.main-content-placeholder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 30%;
+    font-family: 'Jura', sans-serif;
+    font-size: 146px;
+}
+
+.other-content-placeholder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 5%;
+    font-family: 'Jura', sans-serif;
+    font-size: 32px;
+}

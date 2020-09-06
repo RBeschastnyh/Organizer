@@ -1,32 +1,37 @@
 package ru.strawberry.organizer.helpers;
 
+import org.json.simple.JSONObject;
+
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 
 public class GetResponseHelper {
 
-    public String getResponse(String urlString, String param) {
+    public JSONObject getResponse(String urlString, String param) {
         SafeURLBuilder safeURLBuilder = new SafeURLBuilder();
+        JsonHandleHelper jsonHandleHelper = new JsonHandleHelper();
         URL url = safeURLBuilder.createURL(urlString, param);
-        HttpsURLConnection httpsURLConnection = CreateConnectionHelper.createConnection(url);
+        URLConnection httpsURLConnection = CreateConnectionHelper.createConnection(url);
         String response = getFullResponseString(httpsURLConnection);
-        return response;
-
+        JSONObject jsonObject = jsonHandleHelper.createJsonObjectFromString(response);
+        return jsonObject;
     }
 
-    private String getFullResponseString(HttpsURLConnection httpsURLConnection) {
-        if(httpsURLConnection != null) {
-            return getResponseIfHTTPConnectionCreated(httpsURLConnection);
+    private String getFullResponseString(URLConnection urlConnection) {
+        if(urlConnection != null) {
+            return getResponseIfConnectionCreated(urlConnection);
         }
         return null;
     }
 
-    private String getResponseIfHTTPConnectionCreated(HttpsURLConnection httpsURLConnection) {
+    private String getResponseIfConnectionCreated(URLConnection urlConnection) {
         StringBuffer stringBuffer = new StringBuffer();
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpsURLConnection.getInputStream()))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 stringBuffer.append(line);

@@ -16,10 +16,8 @@ public class TimeHelper {
     private static final String SCHEDULE_URL = "https://api.rasp.yandex.net/v3.0/search/?apikey=66bda60c-dcb8-48af-bea3-abe765c74129&format=json&lang=ru_RU&date=%s&to=%s&limit=200&from=c10743";
 
     public String getClosestTimeFromResponse(String stationCode) {
-        JsonHandleHelper jsonHandleHelper = new JsonHandleHelper();
         GetResponseHelper getResponseHelper = new GetResponseHelper();
-        String s = getResponseHelper.getResponse(SCHEDULE_URL, stationCode);
-        JSONObject jsonObject = jsonHandleHelper.createJsonObjectFromString(s);
+        JSONObject jsonObject = getResponseHelper.getResponse(SCHEDULE_URL, stationCode);
         List<String> timeStringList = new ArrayList<String>();
         if (jsonObject != null) {
             JSONArray jsonArray = (JSONArray) jsonObject.get("segments");

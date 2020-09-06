@@ -31,7 +31,7 @@
         <div class="main-text">
             Расписание
         </div>
-        <div class="schedule-placeholder">
+        <div class="content-placeholder">
             <div class="schedule-column-placeholder">
                 <div class="schedule-line">
                     <div class="image-part-placeholder">

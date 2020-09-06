@@ -4,8 +4,13 @@ import ru.strawberry.organizer.helpers.TimeHelper;
 
 public class ScheduleService {
 
+    private TimeHelper timeHelper;
+
+    public ScheduleService(TimeHelper timeHelper) {
+        this.timeHelper = timeHelper;
+    }
+
     public String getTime(String stationCode){
-        TimeHelper timeHelper = new TimeHelper();
         return timeHelper.getClosestTimeFromResponse(stationCode);
     }
 
