@@ -1,4 +1,5 @@
 @import "./schedule-style.css";
+@import "./weather.css";
 
 html {
     min-height: 100%;

@@ -8,23 +8,9 @@ import java.net.URL;
 
 public class GetResponseHelper {
 
-    private String stationCode;
-
-    public GetResponseHelper(String stationCode) {
-        this.stationCode = stationCode;
-    }
-
-    public String getStationCode() {
-        return stationCode;
-    }
-
-    public void setStationCode(String stationCode) {
-        this.stationCode = stationCode;
-    }
-
-    public String getResponse() {
+    public String getResponse(String urlString, String param) {
         SafeURLBuilder safeURLBuilder = new SafeURLBuilder();
-        URL url = safeURLBuilder.createURL(this.stationCode);
+        URL url = safeURLBuilder.createURL(urlString, param);
         HttpsURLConnection httpsURLConnection = CreateConnectionHelper.createConnection(url);
         String response = getFullResponseString(httpsURLConnection);
         return response;
@@ -32,12 +18,17 @@ public class GetResponseHelper {
     }
 
     private String getFullResponseString(HttpsURLConnection httpsURLConnection) {
-        StringBuffer stringBuffer = null;
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpsURLConnection.getInputStream()))){
-            String line;
-            stringBuffer = new StringBuffer();
+        if(httpsURLConnection != null) {
+            return getResponseIfHTTPConnectionCreated(httpsURLConnection);
+        }
+        return null;
+    }
 
-            while ((line = bufferedReader.readLine()) != null){
+    private String getResponseIfHTTPConnectionCreated(HttpsURLConnection httpsURLConnection) {
+        StringBuffer stringBuffer = new StringBuffer();
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpsURLConnection.getInputStream()))) {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
                 stringBuffer.append(line);
             }
         } catch (IOException e) {
@@ -45,7 +36,6 @@ public class GetResponseHelper {
         }
 
         return stringBuffer.toString();
-
     }
 
 }

@@ -21,6 +21,7 @@ public class OrganizerSchedulePageServlet extends HttpServlet {
         req.setAttribute("filiTime", scheduleService.getTime("fili"));
         req.setAttribute("sbTime", scheduleService.getTime("sb"));
         req.setAttribute("kuntsTime", scheduleService.getTime("kunts"));
+        req.setAttribute("setunTime", scheduleService.getTime("setun"));
         req.getRequestDispatcher("/schedule.jsp").forward(req, resp);
     }
 

@@ -13,31 +13,25 @@ import java.util.List;
 
 public class TimeHelper {
 
-    private GetResponseHelper getResponseHelper;
+    private static final String SCHEDULE_URL = "https://api.rasp.yandex.net/v3.0/search/?apikey=66bda60c-dcb8-48af-bea3-abe765c74129&format=json&lang=ru_RU&date=%s&to=%s&limit=200&from=c10743";
 
-    public TimeHelper(GetResponseHelper getResponseHelper) {
-        this.getResponseHelper = getResponseHelper;
-    }
-
-    public String getClosestTimeFromResponse() {
-        JsonHandleHelper jsonHandleHelper = new JsonHandleHelper(this.getResponseHelper);
-        String s = jsonHandleHelper.getGetResponseHelper().getResponse();
+    public String getClosestTimeFromResponse(String stationCode) {
+        JsonHandleHelper jsonHandleHelper = new JsonHandleHelper();
+        GetResponseHelper getResponseHelper = new GetResponseHelper();
+        String s = getResponseHelper.getResponse(SCHEDULE_URL, stationCode);
         JSONObject jsonObject = jsonHandleHelper.createJsonObjectFromString(s);
-        String time = null;
+        List<String> timeStringList = new ArrayList<String>();
         if (jsonObject != null) {
-            List<String> timeStringList = new ArrayList<String>();
             JSONArray jsonArray = (JSONArray) jsonObject.get("segments");
             for(int i = 0; i < jsonArray.size(); ++i){
                 timeStringList.add(((JSONObject)jsonArray.get(i)).get("departure").toString());
             }
-            time = getClosestTimeFromList(timeStringList);
         }
-        return time;
+        return getClosestTimeFromList(timeStringList);
     }
 
     private String getClosestTimeFromList(@Nonnull List<String> timeList) {
-        String closestTime = null;
-        Date date1 = new Date();
+        String closestTime = "";
         long currentTimeInMilliseconds = System.currentTimeMillis() / 1000L;
         try {
             Calendar calendar = Calendar.getInstance();

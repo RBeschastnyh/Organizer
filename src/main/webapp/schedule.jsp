@@ -20,12 +20,12 @@
                 <div class="main-menu-placeholder">
                     <div class="menu-item"><a class="without-highlighting" href="/strawberry-organizer/">Главная</a></div>
                     <div class="menu-item"><a class="without-highlighting" href="/strawberry-organizer/schedule">Посмотреть электричку</a></div>
-                    <div class="menu-item">Погода в твоём районе</div>
+                    <div class="menu-item"><a class="without-highlighting" href="/strawberry-organizer/weather">Погода в твоём районе</a></div>
                     <div class="menu-item">Список дел</div>
                     <div class="menu-item">Расписание занятий</div>
                     <div class="menu-item">Об авторе</div>
                 </div>
-                </label>
+            </label>
             </div>
         </nav>
         <div class="main-text">
@@ -80,7 +80,7 @@
                     </div>
                     <div class="subway-time-placeholder">
                         <div class="text-placeholder">
-
+                            ${setunTime}
                         </div>
                     </div>
                 </div>

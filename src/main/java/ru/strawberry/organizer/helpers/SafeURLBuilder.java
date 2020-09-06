@@ -1,5 +1,6 @@
 package ru.strawberry.organizer.helpers;
 
+import javax.annotation.Nonnull;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -7,18 +8,30 @@ import java.util.Date;
 
 public class SafeURLBuilder {
 
-    private static final String SCHEDULE_URL = "https://api.rasp.yandex.net/v3.0/search/?apikey=66bda60c-dcb8-48af-bea3-abe765c74129&format=json&lang=ru_RU&date=%s&to=%s&limit=200&from=c10743";
-
-    public URL createURL(String stationName){
-        URL url = null;
-        String fullPath = String.format(SCHEDULE_URL, getDateInString(), getStationCode(stationName));
+    public URL createURL(String urlTemplate, String stationName){
+        String fullPath;
+        if(stationName != null){
+            fullPath = String.format(urlTemplate, getDateInString(), getStationCode(stationName));
+        }else {
+            fullPath = urlTemplate;
+        }
         try {
-            url = new URL(fullPath);
+            return new URL(fullPath);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        return url;
+        return null;
     }
+
+//    public URL createURL(String urlTemplate){
+//        String fullPath = String.format(urlTemplate);
+//        try {
+//            return new URL(fullPath);
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 
     /*TODO: заменить на БД*/
     private String getStationCode(String stationName) {
@@ -46,6 +59,10 @@ public class SafeURLBuilder {
             }
             case "kunts" : {
                 stationCode = "s9601728";
+                break;
+            }
+            case "setun" : {
+                stationCode = "s9600941";
                 break;
             }
             default: {
