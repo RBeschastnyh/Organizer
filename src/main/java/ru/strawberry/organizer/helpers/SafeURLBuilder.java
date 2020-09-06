@@ -1,6 +1,5 @@
 package ru.strawberry.organizer.helpers;
 
-import javax.annotation.Nonnull;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -22,16 +21,6 @@ public class SafeURLBuilder {
         }
         return null;
     }
-
-//    public URL createURL(String urlTemplate){
-//        String fullPath = String.format(urlTemplate);
-//        try {
-//            return new URL(fullPath);
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
 
     /*TODO: заменить на БД*/
     private String getStationCode(String stationName) {
