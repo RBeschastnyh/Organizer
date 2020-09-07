@@ -10,7 +10,7 @@ public class WeatherHelper {
     public String getCurrentTemperature() {
         GetResponseHelper getResponseHelper = new GetResponseHelper();
         if(responseObject == null){
-            responseObject = getResponseHelper.getResponse(WEATHER_URL, null);
+            responseObject = getResponseHelper.getResponse(WEATHER_URL);
         }
         return ((JSONObject)responseObject.get("current")).get("temperature").toString();
     }
@@ -18,7 +18,7 @@ public class WeatherHelper {
     public String getCurrentTemperatureAsFeels() {
         GetResponseHelper getResponseHelper = new GetResponseHelper();
         if(responseObject == null){
-            responseObject = getResponseHelper.getResponse(WEATHER_URL, null);
+            responseObject = getResponseHelper.getResponse(WEATHER_URL);
         }
         return ((JSONObject)responseObject.get("current")).get("feelslike").toString();
     }

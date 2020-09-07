@@ -10,10 +10,10 @@ import java.net.URLConnection;
 
 public class GetResponseHelper {
 
-    public JSONObject getResponse(String urlString, String param) {
+    public JSONObject getResponse(String urlString) {
         SafeURLBuilder safeURLBuilder = new SafeURLBuilder();
         JsonHandleHelper jsonHandleHelper = new JsonHandleHelper();
-        URL url = safeURLBuilder.createURL(urlString, param);
+        URL url = safeURLBuilder.createURL(urlString);
         URLConnection httpsURLConnection = CreateConnectionHelper.createConnection(url);
         String response = getFullResponseString(httpsURLConnection);
         JSONObject jsonObject = jsonHandleHelper.createJsonObjectFromString(response);
